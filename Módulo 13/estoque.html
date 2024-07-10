@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <title>Estoque</title>
+        <style>
+            body {
+                font-size: 20px;
+                font-family: sans-serif;
+                margin: 20px;
+                background-color: #f4f4f9;
+            }
+            h2 {
+                color: #333;
+                font-weight: bold;
+            }
+            table {
+                border-collapse: collapse;
+                margin-bottom: 20px;
+            }
+            table, th, td {
+                border: 1px solid #ccc;
+            }
+            th, td {
+                padding: 8px;
+                text-align: left;
+            }
+            th {
+                background-color: #f2f2f2;
+            }
+            fieldset {
+                max-width: 600px;
+                background-color: #fff;
+                padding: 20px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+            }
+            fieldset table {
+                width: 100%;
+                border: none;
+            }
+            fieldset table td {
+                padding: 8px;
+                border: none;
+            }
+            input[type="text"], input[type="number"] {
+                width: 100%;
+                padding: 8px;
+                margin: 4px 0;
+                box-sizing: border-box;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+            }
+
+            #cadastrar, input[type="reset"] {
+                color: white;
+                padding: 10px 20px;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 16px;
+                text-align: center;
+                width: 30%;
+                transition-property: width;
+                transition-duration: 0.5s;
+            }
+            #cadastrar {
+                background-color: #4CAF50;
+            }
+
+            input[type="reset"] {
+                background-color: #df0026;
+            }
+            
+            #cadastrar:hover{
+                background-color: #45a049;
+                width: 40%;
+            }
+
+            input[type="reset"]:hover{
+                background-color: #B80E22;
+                width: 40%;
+            }
+        </style>
+    </head>
+    <body>
+        <h2>Tabela de Estoque de Produtos</h2>
+        <table id="tabela_produto">
+            <thead>
+                <th>Código de Produto</th>
+                <th>Descrição do Produto</th>
+                <th>Preço (R$)</th>
+                <th>Quantidade</th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>PROD0001</td>
+                    <td>Camisa Básica Preta</td>
+                    <td>80,00</td>
+                    <td>8</td>
+                </tr>
+                <tr>
+                    <td>PROD0002</td>
+                    <td>Calça Jeans Masculina</td>
+                    <td>150,00</td>
+                    <td>10</td>
+                </tr>
+                <tr>
+                    <td>PROD0003</td>
+                    <td>Tênis Esportivo</td>
+                    <td>400,00</td>
+                    <td>3</td>
+                </tr>
+                <tr>
+                    <td>PROD0004</td>
+                    <td>Mochila Escolar</td>
+                    <td>350,00</td>
+                    <td>10</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <form id="estoque">            
+            <fieldset>
+                <legend>Cadastro de Produtos</legend>
+                
+                <table class="formulario_produto">
+                    <tr>
+                        <td><label for="codigo_produto">Código do Produto:</label></td>
+                        <td><input type="text" id="codigo_produto" name="codigo_produto" required></td>
+                    </tr>
+                    <tr>
+                        <td><label for="descricao_produto">Descrição do Produto:</label></td>
+                        <td><input type="text" id="descricao_produto" name="descricao_produto" required></td>
+                    </tr>
+                    <tr>
+                        <td><label for="preco">Preço:</label></td>
+                        <td><input type="number" id="preco" name="preco" step="0.01" required></td>
+                    </tr>
+                    <tr>
+                        <td><label for="quantidade">Quantidade:</label></td>
+                        <td><input type="number" id="quantidade" name="quantidade" required></td>
+                    </tr>           
+                    <tr>
+                        <td colspan="2" style="text-align: center;">
+                            <input type="reset" value="Limpar">
+                            <input id="cadastrar" value="Cadastrar">
+                        </td>
+                    </tr>
+                </table>
+            </fieldset>
+        </form>
+    </body>
+    <script>
+        document.getElementById('cadastrar').addEventListener('click', function() {
+
+            // Captura os dados do formulário
+            const codigoProduto = document.getElementById('codigo_produto').value;
+            if(codigoProduto == ""){
+                alert("O código do produto precisa ser informado.");
+                return;
+            }
+            const descricaoProduto = document.getElementById('descricao_produto').value;
+            if(descricaoProduto == 0){
+                alert("A descrição do produto precisa ser informada.");
+                return;
+            }
+            const preco = document.getElementById('preco').value;
+            if (preco <= 0){
+                alert("O preço é menor ou igual a 0. Por favor informe um novo valor.");
+                return;
+            }
+            const quantidade = document.getElementById('quantidade').value;
+            if (quantidade < 0){
+                alert("A quantidade não pode ser menor 0. Por favor informe um novo valor.");
+                return;
+            }
+
+            // Cria uma nova linha na tabela
+            const tabela = document.getElementById("tabela_produto").getElementsByTagName("tbody")[0];
+            const novaLinha = tabela.insertRow();
+
+            // Adiciona as células na nova linha
+            const celulaCodigo = novaLinha.insertCell(0);
+            const celulaDescricao = novaLinha.insertCell(1);
+            const celulaPreco = novaLinha.insertCell(2);
+            const celulaQuantidade = novaLinha.insertCell(3);
+
+            // Define o conteúdo das células
+            celulaCodigo.textContent = codigoProduto;
+            celulaDescricao.textContent = descricaoProduto;
+            celulaPreco.textContent = parseFloat(preco).toFixed(2);
+            celulaQuantidade.textContent = quantidade;
+
+            // Limpa o formulário após o envio
+            document.getElementById('estoque').reset();
+
+        });
+    </script>
+</html>
