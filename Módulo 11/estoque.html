@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <title>Estoque</title>
+        <style>
+            body {
+                font-size: 20px;
+                font-family: sans-serif;
+                margin: 20px;
+                background-color: #f4f4f9;
+            }
+            h2 {
+                color: #333;
+                font-weight: bold;
+            }
+            table {
+                border-collapse: collapse;
+                margin-bottom: 20px;
+            }
+            table, th, td {
+                border: 1px solid #ccc;
+            }
+            th, td {
+                padding: 8px;
+                text-align: left;
+            }
+            th {
+                background-color: #f2f2f2;
+            }
+            fieldset {
+                max-width: 600px;
+                background-color: #fff;
+                padding: 20px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+            }
+            fieldset table {
+                width: 100%;
+                border: none;
+            }
+            fieldset table td {
+                padding: 8px;
+                border: none;
+            }
+            input[type="text"], input[type="number"], input[type="date"] {
+                width: 100%;
+                padding: 8px;
+                margin: 4px 0;
+                box-sizing: border-box;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+            }
+
+            input[type="submit"], input[type="reset"] {
+                color: white;
+                padding: 10px 20px;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 16px;
+                width: 30%;
+                transition-property: width;
+                transition-duration: 0.5s;
+            }
+            input[type="submit"] {
+                background-color: #4CAF50;
+            }
+
+            input[type="reset"] {
+                background-color: #df0026;
+            }
+            
+            input[type="submit"]:hover{
+                background-color: #45a049;
+                width: 40%;
+            }
+
+            input[type="reset"]:hover{
+                background-color: #B80E22;
+                width: 40%;
+            }
+        </style>
+    </head>
+    <body>
+        <h2>Tabela de Estoque de Produtos</h2>
+        <table>
+            <thead>
+                <th>Código de Produto</th>
+                <th>Descrição do Produto</th>
+                <th>Preço (R$)</th>
+                <th>Quantidade</th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>PROD0001</td>
+                    <td>Camisa Básica Preta</td>
+                    <td>80,00</td>
+                    <td>8</td>
+                </tr>
+                <tr>
+                    <td>PROD0002</td>
+                    <td>Calça Jeans Masculina</td>
+                    <td>150,00</td>
+                    <td>10</td>
+                </tr>
+                <tr>
+                    <td>PROD0003</td>
+                    <td>Tênis Esportivo</td>
+                    <td>400,00</td>
+                    <td>3</td>
+                </tr>
+                <tr>
+                    <td>PROD0004</td>
+                    <td>Mochila Escolar</td>
+                    <td>350,00</td>
+                    <td>10</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <form action="/cadastrar_estoque" method="post">            
+            <fieldset>
+                <legend>Cadastro de Produtos</legend>
+                
+                <table>
+                    <tr>
+                        <td><label for="codigo_produto">Código do Produto:</label></td>
+                        <td><input type="text" id="codigo_produto" name="codigo_produto" required></td>
+                    </tr>
+                    <tr>
+                        <td><label for="descricao_produto">Descrição do Produto:</label></td>
+                        <td><input type="text" id="descricao_produto" name="descricao_produto" required></td>
+                    </tr>
+                    <tr>
+                        <td><label for="preco">Preço:</label></td>
+                        <td><input type="number" id="preco" name="preco" step="0.01" required></td>
+                    </tr>
+                    <tr>
+                        <td><label for="quantidade">Quantidade:</label></td>
+                        <td><input type="number" id="quantidade" name="quantidade" required></td>
+                    </tr>           
+                    <tr>
+                        <td colspan="2" style="text-align: center;">
+                            <input type="reset" value="Limpar">
+                            <input type="submit" value="Cadastrar">
+                        </td>
+                    </tr>
+                </table>
+            </fieldset>
+        </form>
+    </body>
+    <script>
+        let frutas = ["Maçã", "Banana", "Laranja"];
+        console.log(frutas[0]);
+        console.log(frutas[2]);
+
+        frutas[2] = "Morango";
+        console.log(frutas[2]);
+
+        frutas = ["Mamão", "Pessego", "Banana"];
+        console.log(frutas);
+
+        /**
+         * Praticando o uso de Arrays
+         */ 
+
+        let objetos = new Array("geladeira", "mesa", "cadeira");
+        console.log(objetos);
+
+        objetos[4] = 5;
+
+        objetos[5] = 1.2;
+
+        objetos[3] = "computador";
+        console.log(objetos);
+
+        /**
+         * Métodos de Arrays
+         */
+
+         frutas.push("Morango");
+         frutas.push("Manga");
+         console.log(frutas);
+
+
+         frutas.unshift("Laranja");
+         console.log(frutas);
+
+         frutas.shift();
+         console.log(frutas);
+
+         let novoArray = frutas.concat(objetos);
+         console.log(novoArray);
+
+
+    </script>
+</html>
